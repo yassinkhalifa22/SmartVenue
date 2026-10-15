@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="Library Books Management System/Library Books Management System.csproj" />
+  <Project Path="LibraryManagement.Business/LibraryManagement.Business.csproj" Id="ea1c42af-4705-4c59-8572-ebf3b295c0ea" />
+  <Project Path="└── LibraryManagement.Data/└── LibraryManagement.Data.csproj" Id="79cbe5a7-d4cd-4da3-a2d5-99b6c0ed6718" />
 </Solution>

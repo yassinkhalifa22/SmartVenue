@@ -1,10 +1,17 @@
-﻿namespace Library_Books_Management_System
+﻿using __LibraryManagement.Data.BookRe;
+using Library_Books_Management_System;
+using Library_Books_Management_System.Service.BookSV;
+using System;
+using System.Diagnostics.Metrics;
+
+class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
+        IBookService bookService = new BookService(new BookRepository());
+
+        LibraryMenu menu = new LibraryMenu(bookService);
+
+        menu.Run();
     }
 }

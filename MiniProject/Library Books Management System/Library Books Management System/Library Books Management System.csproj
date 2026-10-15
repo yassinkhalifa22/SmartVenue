@@ -8,4 +8,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryManagement.Business\LibraryManagement.Business.csproj" />
+  </ItemGroup>
+
 </Project>
