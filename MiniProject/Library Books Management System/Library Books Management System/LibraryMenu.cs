@@ -1,24 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using __LibraryManagement.Data.Models;
+using Library_Books_Management_System.Service.BookSV;
+using Library_Books_Management_System.Service.BorrowSV;
 
 namespace Library_Books_Management_System
 {
-    using __LibraryManagement.Data.Models;
-    using Library_Books_Management_System.Service.BookSV;
-    using System;
+
 
     public class LibraryMenu
     {
         private readonly IBookService _bookService;
+        private readonly BorrowManager _borrowManager;
 
-        public LibraryMenu(IBookService bookService)
+        public LibraryMenu(IBookService bookService, BorrowManager borrowManager)
         {
             _bookService = bookService;
+            _borrowManager = borrowManager;
+
         }
 
         private enum EnChoice
-        { AddBook = 1, DisplayAllBooks, SearchBookById, SearchBookByTitle, UpdateBook, DeleteBook, Exit }
+        {
+            AddBook = 1, DisplayAllBooks, SearchBookById, SearchBookByTitle,
+            UpdateBook, DeleteBook, AddMember,
+            BorrowBook, ReturnBook, DisplayAllMembers,
+            DisplayActiveBorrows, DisplayOverdueBorrows, Exit
+        }
+        private void DisplayHeader()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            Console.WriteLine("==================================================");
+            Console.WriteLine("           LIBRARY MANAGEMENT SYSTEM");
+            Console.WriteLine("==================================================");
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("          Books | Members | Borrowing");
+            Console.WriteLine();
+
+            Console.ResetColor();
+        }
+
+        private void DisplayMenu()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("  BOOK MANAGEMENT");
+            Console.ResetColor();
+
+            Console.WriteLine("  [1]  Add Book");
+            Console.WriteLine("  [2]  Display All Books");
+            Console.WriteLine("  [3]  Search Book By ID");
+            Console.WriteLine("  [4]  Search Book By Title");
+            Console.WriteLine("  [5]  Update Book");
+            Console.WriteLine("  [6]  Delete Book");
+
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("  MEMBER & BORROWING MANAGEMENT");
+            Console.ResetColor();
+
+            Console.WriteLine("  [7]  Add Member");
+            Console.WriteLine("  [8]  Borrow Book");
+            Console.WriteLine("  [9]  Return Book");
+            Console.WriteLine("  [10] Display All Members");
+            Console.WriteLine("  [11] Display Active Borrows");
+            Console.WriteLine("  [12] Display Overdue Borrows");
+
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("  [13] Exit");
+            Console.ResetColor();
+
+            Console.WriteLine("==================================================");
+        }
 
         public void Run()
         {
@@ -26,19 +85,13 @@ namespace Library_Books_Management_System
 
             while (isRunning)
             {
-                Console.WriteLine("========== Library Management ==========");
-                Console.WriteLine("1. Add Book");
-                Console.WriteLine("2. Display All Books");
-                Console.WriteLine("3. Search Book By ID");
-                Console.WriteLine("4. Search Book By Title");
-                Console.WriteLine("5. Update Book");
-                Console.WriteLine("6. Delete Book");
-                Console.WriteLine("7. Exit");
-                Console.WriteLine("========================================");
+                DisplayHeader();
+                DisplayMenu();
 
                 EnChoice choice = ReadChoice();
 
                 Console.WriteLine();
+
 
                 switch (choice)
                 {
@@ -64,6 +117,28 @@ namespace Library_Books_Management_System
 
                     case EnChoice.DeleteBook:
                         DeleteBook();
+                        break;
+                    case EnChoice.AddMember:
+                        AddMember();
+                        break;
+                    case EnChoice.BorrowBook:
+                        BorrowBook();
+                        break;
+
+                    case EnChoice.ReturnBook:
+                        ReturnBook();
+                        break;
+
+                    case EnChoice.DisplayAllMembers:
+                        DisplayAllMembers();
+                        break;
+
+                    case EnChoice.DisplayActiveBorrows:
+                        DisplayActiveBorrows();
+                        break;
+
+                    case EnChoice.DisplayOverdueBorrows:
+                        DisplayOverdueBorrows();
                         break;
 
                     case EnChoice.Exit:
@@ -92,9 +167,10 @@ namespace Library_Books_Management_System
                     return (EnChoice)choice;
                 }
 
-                Console.Write("Invalid choice. Enter a number from 1 to 7: ");
+                Console.Write("Invalid choice. Enter a number from 1 to 13: ");
             }
         }
+
 
         private void AddBook()
         {
@@ -102,8 +178,9 @@ namespace Library_Books_Management_System
 
             bool result = _bookService.AddBook(book);
 
-            Console.WriteLine(result? "Book added successfully.": "Failed to add book.");
+            Console.WriteLine(result ? "Book added successfully." : "Failed to add book.");
         }
+
 
         private void DisplayAllBooks()
         {
@@ -169,7 +246,7 @@ namespace Library_Books_Management_System
 
             bool result = _bookService.UpdateBook(bookId, updatedBook);
 
-            Console.WriteLine(result? "Book updated successfully.": "Failed to update book.");
+            Console.WriteLine(result ? "Book updated successfully." : "Failed to update book.");
         }
 
         private void DeleteBook()
@@ -179,7 +256,7 @@ namespace Library_Books_Management_System
             bool result = _bookService.DeleteBook(bookId);
 
             Console.WriteLine(
-                result? "Book deleted successfully.": "Book not found.");
+                result ? "Book deleted successfully." : "Book not found.");
         }
 
         private Book ReadBookInfo()
@@ -250,7 +327,7 @@ namespace Library_Books_Management_System
 
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out int value)&& value >= 0)
+                if (int.TryParse(Console.ReadLine(), out int value) && value >= 0)
                 {
                     return value;
                 }
@@ -273,5 +350,128 @@ namespace Library_Books_Management_System
                 Console.Write("Enter a valid non-negative price: ");
             }
         }
+
+        private void BorrowBook()
+        {
+            Console.Write("Enter Member ID: ");
+            int memberId = int.Parse(Console.ReadLine()!);
+
+            Console.Write("Enter Book ID: ");
+            int bookId = int.Parse(Console.ReadLine()!);
+
+            Console.Write("Enter borrowing duration in days: ");
+            int dueDays = int.Parse(Console.ReadLine()!);
+
+            bool result = _borrowManager.BorrowBook(
+                memberId,
+                bookId,
+                dueDays);
+
+            if (result)
+            {
+                Console.WriteLine("Book borrowed successfully!");
+            }
+            else
+            {
+                Console.WriteLine(
+                    "Borrowing failed. Check Member ID, Book ID, and available copies.");
+            }
+        }
+
+        private void ReturnBook()
+        {
+            Console.Write("Enter Borrow ID: ");
+            int borrowId = int.Parse(Console.ReadLine()!);
+
+            bool result = _borrowManager.ReturnBook(borrowId);
+
+            if (result)
+            {
+                Console.WriteLine("Book returned successfully!");
+            }
+            else
+            {
+                Console.WriteLine(
+                    "Return failed. Please check the Borrow ID.");
+            }
+        }
+        private void AddMember()
+        {
+            Console.Write("Enter Member Name: ");
+            string name = Console.ReadLine() ?? "";
+
+            bool result = _borrowManager.AddMember(name);
+
+            if (result)
+            {
+                Console.WriteLine("Member added successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid member name.");
+            }
+        }
+        private void DisplayAllMembers()
+        {
+            List<Member> members = _borrowManager.GetAllMembers();
+
+            if (members.Count == 0)
+            {
+                Console.WriteLine("No members found.");
+                return;
+            }
+
+            Console.WriteLine("========== Members ==========");
+
+            foreach (Member member in members)
+            {
+                Console.WriteLine(
+                    $"Member ID: {member.MemberId}, Name: {member.Name}");
+            }
+        }
+        private void DisplayActiveBorrows()
+        {
+            List<Borrow> borrows = _borrowManager.GetActiveBorrows();
+
+            if (borrows.Count == 0)
+            {
+                Console.WriteLine("No active borrows found.");
+                return;
+            }
+
+            Console.WriteLine("========== Active Borrows ==========");
+
+            foreach (Borrow borrow in borrows)
+            {
+                Console.WriteLine(
+                    $"Borrow ID: {borrow.BorrowId}, " +
+                    $"Member ID: {borrow.MemberId}, " +
+                    $"Book ID: {borrow.BookId}, " +
+                    $"Borrow Date: {borrow.BorrowDate:g}, " +
+                    $"Due Date: {borrow.DueDate:g}");
+            }
+        }
+        private void DisplayOverdueBorrows()
+        {
+            List<Borrow> borrows = _borrowManager.GetOverdueBorrows();
+
+            if (borrows.Count == 0)
+            {
+                Console.WriteLine("No overdue borrows found.");
+                return;
+            }
+
+            Console.WriteLine("========== Overdue Borrows ==========");
+
+            foreach (Borrow borrow in borrows)
+            {
+                Console.WriteLine(
+                    $"Borrow ID: {borrow.BorrowId}, " +
+                    $"Member ID: {borrow.MemberId}, " +
+                    $"Book ID: {borrow.BookId}, " +
+                    $"Due Date: {borrow.DueDate:g}");
+            }
+        }
+
     }
 }
