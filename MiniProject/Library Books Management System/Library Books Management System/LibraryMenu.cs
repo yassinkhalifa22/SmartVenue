@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library_Books_Management_System.Service.MemberSV;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,15 +12,29 @@ namespace Library_Books_Management_System
     public class LibraryMenu
     {
         private readonly IBookService _bookService;
+        private readonly IMemberService _memberService;
 
-        public LibraryMenu(IBookService bookService)
+        public LibraryMenu(
+       IBookService bookService,
+       IMemberService memberService)
         {
             _bookService = bookService;
+            _memberService = memberService;
         }
 
         private enum EnChoice
-        { AddBook = 1, DisplayAllBooks, SearchBookById, SearchBookByTitle, UpdateBook, DeleteBook, Exit }
-
+        {
+            AddBook = 1,
+            DisplayAllBooks,
+            SearchBookById,
+            SearchBookByTitle,
+            UpdateBook,
+            DeleteBook,
+            AddMember,
+            DisplayAllMembers,
+            SearchMemberById,
+            Exit
+        }
         public void Run()
         {
             bool isRunning = true;
@@ -33,7 +48,10 @@ namespace Library_Books_Management_System
                 Console.WriteLine("4. Search Book By Title");
                 Console.WriteLine("5. Update Book");
                 Console.WriteLine("6. Delete Book");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("7. Add Member");
+                Console.WriteLine("8. Display All Members");
+                Console.WriteLine("9. Search Member By ID");
+                Console.WriteLine("10. Exit"); 
                 Console.WriteLine("========================================");
 
                 EnChoice choice = ReadChoice();
@@ -64,6 +82,18 @@ namespace Library_Books_Management_System
 
                     case EnChoice.DeleteBook:
                         DeleteBook();
+                        break;
+
+                    case EnChoice.AddMember:
+                        AddMember();
+                        break;
+
+                    case EnChoice.DisplayAllMembers:
+                        DisplayAllMembers();
+                        break;
+
+                    case EnChoice.SearchMemberById:
+                        SearchMemberById();
                         break;
 
                     case EnChoice.Exit:
@@ -273,5 +303,63 @@ namespace Library_Books_Management_System
                 Console.Write("Enter a valid non-negative price: ");
             }
         }
+
+        private void AddMember()
+        {
+            int memberId = ReadPositiveInt("Enter Member ID: ");
+
+            string name = ReadRequiredText("Enter Member Name: ");
+
+            Member member = new Member
+            {
+                MemberId = memberId,
+                Name = name
+            };
+
+            bool result = _memberService.AddMember(member);
+
+            Console.WriteLine(
+                result
+                    ? "Member added successfully."
+                    : "Failed to add member. ID may already exist.");
+        }
+
+        private void DisplayAllMembers()
+        {
+            List<Member> members = _memberService.GetAllMembers();
+
+            if (members.Count == 0)
+            {
+                Console.WriteLine("No members found.");
+                return;
+            }
+
+            foreach (Member member in members)
+            {
+                Console.WriteLine("------------------------------");
+                Console.WriteLine($"Member ID: {member.MemberId}");
+                Console.WriteLine($"Name: {member.Name}");
+                Console.WriteLine("------------------------------");
+            }
+        }
+
+        private void SearchMemberById()
+        {
+            int memberId = ReadPositiveInt("Enter Member ID: ");
+
+            Member? member = _memberService.GetMemberById(memberId);
+
+            if (member == null)
+            {
+                Console.WriteLine("Member not found.");
+                return;
+            }
+
+            Console.WriteLine("------------------------------");
+            Console.WriteLine($"Member ID: {member.MemberId}");
+            Console.WriteLine($"Name: {member.Name}");
+            Console.WriteLine("------------------------------");
+        }
     }
+
 }
