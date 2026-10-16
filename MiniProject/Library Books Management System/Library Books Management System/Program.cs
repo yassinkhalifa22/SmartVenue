@@ -1,6 +1,8 @@
 ﻿using __LibraryManagement.Data.BookRe;
 using Library_Books_Management_System;
 using Library_Books_Management_System.Service.BookSV;
+using Library_Books_Management_System.Service.MemberSV;
+
 using System;
 using System.Diagnostics.Metrics;
 
@@ -10,7 +12,9 @@ class Program
     {
         IBookService bookService = new BookService(new BookRepository());
 
-        LibraryMenu menu = new LibraryMenu(bookService);
+        IMemberService memberService = new MemberService();
+
+        LibraryMenu menu = new LibraryMenu(bookService, memberService);
 
         menu.Run();
     }
