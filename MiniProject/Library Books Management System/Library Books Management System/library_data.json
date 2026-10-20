@@ -1,0 +1,31 @@
+{
+  "Books": [
+    {
+      "BookId": 1,
+      "Title": "C#",
+      "Author": "yy",
+      "Price": 100,
+      "TotalCopies": 7,
+      "AvailableCopies": 7
+    },
+    {
+      "BookId": 2,
+      "Title": "CSS",
+      "Author": "tt",
+      "Price": 80,
+      "TotalCopies": 6,
+      "AvailableCopies": 6
+    },
+    {
+      "BookId": 3,
+      "Title": "bookHtml",
+      "Author": "ya",
+      "Price": 40,
+      "TotalCopies": 4,
+      "AvailableCopies": 4
+    }
+  ],
+  "Members": [],
+  "Borrows": [],
+  "Sales": []
+}

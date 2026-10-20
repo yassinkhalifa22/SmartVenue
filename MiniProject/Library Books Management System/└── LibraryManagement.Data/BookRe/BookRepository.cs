@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
@@ -13,6 +13,12 @@ namespace __LibraryManagement.Data.BookRe
         public void Add(Book book)
         {
             _books.Add(book);
+        }
+
+        public void LoadBooks(IEnumerable<Book> books)
+        {
+            _books.Clear();
+            _books.AddRange(books);
         }
 
         public List<Book> GetAll()

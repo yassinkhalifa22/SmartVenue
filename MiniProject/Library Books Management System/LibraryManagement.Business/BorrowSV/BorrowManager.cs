@@ -1,4 +1,4 @@
-﻿using __LibraryManagement.Data.BookRe;
+using __LibraryManagement.Data.BookRe;
 using __LibraryManagement.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -20,11 +20,39 @@ namespace Library_Books_Management_System.Service.BorrowSV
             _bookRepository = bookRepository;
         }
 
+        public void LoadData(IEnumerable<Member>? members, IEnumerable<Borrow>? borrows)
+        {
+            if (members != null)
+            {
+                _members.Clear();
+                _members.AddRange(members);
+                if (_members.Count > 0)
+                {
+                    _memberCounter = _members.Max(m => m.MemberId) + 1;
+                }
+            }
+
+            if (borrows != null)
+            {
+                _borrows.Clear();
+                _borrows.AddRange(borrows);
+                if (_borrows.Count > 0)
+                {
+                    _borrowCounter = _borrows.Max(b => b.BorrowId) + 1;
+                }
+            }
+        }
+
         public bool AddMember(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return false;
+            }
+
+            if (_members.Count > 0 && _memberCounter <= _members.Max(m => m.MemberId))
+            {
+                _memberCounter = _members.Max(m => m.MemberId) + 1;
             }
 
             Member member = new Member
@@ -62,6 +90,11 @@ namespace Library_Books_Management_System.Service.BorrowSV
             if (book == null || book.AvailableCopies <= 0)
             {
                 return false;
+            }
+
+            if (_borrows.Count > 0 && _borrowCounter <= _borrows.Max(b => b.BorrowId))
+            {
+                _borrowCounter = _borrows.Max(b => b.BorrowId) + 1;
             }
 
             Borrow borrow = new Borrow

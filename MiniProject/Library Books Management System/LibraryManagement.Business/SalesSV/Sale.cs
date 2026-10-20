@@ -9,12 +9,16 @@ namespace Library_Books_Management_System.Service.SalesSV
     public class Sale
     {
 
-        public int SaleId { get; private set; }
-        public int BookId { get; private set; }
-        public int Quantity { get; private set; }
-        public decimal TotalPrice { get; private set; }
-        public DateTime SaleDate { get; private set; }
+        public int SaleId { get; set; }
+        public int BookId { get; set; }
+        public int Quantity { get; set; }
+        public decimal TotalPrice { get; set; }
+        public DateTime SaleDate { get; set; }
 
+        public Sale()
+        {
+            SaleDate = DateTime.Now;
+        }
 
         public Sale(int saleId, int bookId, int quantity, decimal totalPrice)
         {
@@ -23,6 +27,15 @@ namespace Library_Books_Management_System.Service.SalesSV
             Quantity = quantity;
             TotalPrice = totalPrice;
             SaleDate = DateTime.Now;
+        }
+
+        public Sale(int saleId, int bookId, int quantity, decimal totalPrice, DateTime saleDate)
+        {
+            SaleId = saleId;
+            BookId = bookId;
+            Quantity = quantity;
+            TotalPrice = totalPrice;
+            SaleDate = saleDate;
         }
 
 

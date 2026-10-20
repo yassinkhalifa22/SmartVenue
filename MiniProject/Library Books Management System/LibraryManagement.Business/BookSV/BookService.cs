@@ -1,4 +1,4 @@
-﻿using __LibraryManagement.Data.BookRe;
+using __LibraryManagement.Data.BookRe;
 using __LibraryManagement.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,19 @@ namespace Library_Books_Management_System.Service.BookSV
         public BookService(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
+        }
+
+        public void SyncCounter()
+        {
+            var books = _bookRepository.GetAll();
+            if (books.Count > 0)
+            {
+                int maxId = books.Max(b => b.BookId);
+                if (counter <= maxId)
+                {
+                    counter = maxId + 1;
+                }
+            }
         }
 
         public bool AddBook(Book book)
@@ -32,6 +45,7 @@ namespace Library_Books_Management_System.Service.BookSV
                 return false;
             }
 
+            SyncCounter();
             book.BookId = counter++;
             book.AvailableCopies = book.TotalCopies;
 

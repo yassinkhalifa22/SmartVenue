@@ -32,6 +32,11 @@ namespace Library_Books_Management_System.Service.SalesSV
             book.AvailableCopies -= quantity;
             book.TotalCopies -= quantity;
 
+            if (_sales.Count > 0 && _nextId <= _sales.Max(s => s.SaleId))
+            {
+                _nextId = _sales.Max(s => s.SaleId) + 1;
+            }
+
             Sale sale = new Sale(_nextId++, bookId, quantity, book.Price * quantity);
             _sales.Add(sale);
             return sale;
@@ -83,6 +88,26 @@ namespace Library_Books_Management_System.Service.SalesSV
         public decimal GetTotalSales()
         {
             return _sales.Sum(s => s.TotalPrice);
+        }
+        #endregion
+
+        #region Persistence Helpers
+        public List<Sale> GetAllSales()
+        {
+            return _sales.ToList();
+        }
+
+        public void LoadSales(IEnumerable<Sale>? sales)
+        {
+            if (sales != null)
+            {
+                _sales.Clear();
+                _sales.AddRange(sales);
+                if (_sales.Count > 0)
+                {
+                    _nextId = _sales.Max(s => s.SaleId) + 1;
+                }
+            }
         }
         #endregion
     }
