@@ -20,10 +20,10 @@ class Program
         SalesManager salesManager = new SalesManager(bookService);
         Inventory inventory = new Inventory(bookService);
 
-        LibraryDataStore dataStore = new LibraryDataStore(bookRepository, bookService, borrowManager, salesManager , dataStore );
+        LibraryDataStore dataStore = new LibraryDataStore(bookRepository, bookService, borrowManager, salesManager );
         dataStore.LoadData();
 
-        LibraryMenu menu = new LibraryMenu(bookService, borrowManager, salesManager, inventory);
+        LibraryMenu menu = new LibraryMenu(bookService, borrowManager, salesManager, inventory , dataStore );
         try
         {
             Console.Title = "Library Management System";
