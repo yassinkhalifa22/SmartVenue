@@ -210,11 +210,12 @@ namespace Library_Books_Management_System
 
                     case EnChoice.Exit:
                         isRunning = false;
-                        _dataStore?.SaveData();
                         Console.WriteLine("Goodbye!");
                         break;
                 }
-
+                
+                  _dataStore?.SaveData();
+                
                 if (isRunning)
                 {
                     Console.WriteLine("\nPress any key to continue...");
