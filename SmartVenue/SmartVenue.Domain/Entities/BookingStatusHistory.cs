@@ -1,4 +1,5 @@
 ﻿using SmartVenue.Domain.Common;
+using SmartVenue.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,11 +1,12 @@
 ﻿using SmartVenue.Domain.Common;
+using SmartVenue.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SmartVenue.Domain.Entities
 {
-    class Booking : BaseEntity
+    public class Booking : BaseEntity
     {
         public string BookingCode { get; set; } = string.Empty;
 

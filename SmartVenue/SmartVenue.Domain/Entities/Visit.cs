@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SmartVenue.Domain.Enums;
 
 namespace SmartVenue.Domain.Entities
 {

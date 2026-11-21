@@ -1,4 +1,5 @@
-﻿using SmartVenue.Domain.Common;
+﻿using Microsoft.AspNetCore.Identity;
+using SmartVenue.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
