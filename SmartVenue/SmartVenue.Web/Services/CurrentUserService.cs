@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using SmartVenue.Application.Common;
+using System.Security.Claims;
 
 namespace SmartVenue.Web.Services
 {

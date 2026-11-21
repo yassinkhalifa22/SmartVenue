@@ -3,15 +3,20 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SmartVenue.Application.Common;
+using SmartVenue.Application.Common.Interfaces;
 using SmartVenue.Domain.Common;
-using SmartVenue.Domain.Entities;
+using SmartVenue.Domain.Entities.BookingEntites;
+using SmartVenue.Domain.Entities.Identity;
+using SmartVenue.Domain.Entities.Notifications;
+using SmartVenue.Domain.Entities.Ticketing;
+using SmartVenue.Domain.Entities.Venues;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SmartVenue.Infrastructure.Persistence
 {
-    public class SmartVenueDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
+    public class SmartVenueDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int> , IAppDbContext
     {
         private readonly ICurrentUserService? _currentUser;
 
@@ -20,6 +25,7 @@ namespace SmartVenue.Infrastructure.Persistence
             _currentUser = currentUser;
         }
 
+        public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
         public DbSet<VenueJoinRequest> VenueJoinRequests => Set<VenueJoinRequest>();
         public DbSet<Venue> Venues => Set<Venue>();
         public DbSet<VenueImage> VenueImages => Set<VenueImage>();
