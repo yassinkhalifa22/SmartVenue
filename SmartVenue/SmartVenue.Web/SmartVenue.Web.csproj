@@ -11,4 +11,8 @@
     <ProjectReference Include="..\SmartVenue.Infrastructure\SmartVenue.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

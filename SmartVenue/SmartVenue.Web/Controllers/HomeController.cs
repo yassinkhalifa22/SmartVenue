@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SmartVenue.Web.Models;
+using SmartVenue.Domain.Entities;
 using System.Diagnostics;
 
 namespace SmartVenue.Web.Controllers
