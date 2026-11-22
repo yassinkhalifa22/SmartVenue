@@ -8,11 +8,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmartVenue.Application\SmartVenue.Application.csproj" />
+    <ProjectReference Include="..\SmartVenue.Domain\SmartVenue.Domain.csproj" />
     <ProjectReference Include="..\SmartVenue.Infrastructure\SmartVenue.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\images\venues\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
