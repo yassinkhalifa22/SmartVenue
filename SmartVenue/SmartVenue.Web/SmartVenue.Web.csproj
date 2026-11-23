@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmartVenue.Application\SmartVenue.Application.csproj" />
+    <ProjectReference Include="..\SmartVenue.DataAccess\SmartVenue.DataAccess.csproj" />
     <ProjectReference Include="..\SmartVenue.Domain\SmartVenue.Domain.csproj" />
     <ProjectReference Include="..\SmartVenue.Infrastructure\SmartVenue.Infrastructure.csproj" />
   </ItemGroup>

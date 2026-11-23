@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="SmartVenue.Application/SmartVenue.Application.csproj" />
-  <Project Path="SmartVenue.Domain/SmartVenue.Domain.csproj" />
-  <Project Path="SmartVenue.Infrastructure/SmartVenue.Infrastructure.csproj" />
+  <Project Path="SmartVenue.Core/SmartVenue.Core.csproj" Id="e57ef766-1ce7-4ec2-bf21-3d330d2a5684" />
+  <Project Path="SmartVenue.DataAccess/SmartVenue.DataAccess.csproj" Id="79c98505-4294-46e6-b2f9-25197e50acbf" />
   <Project Path="SmartVenue.Web/SmartVenue.Web.csproj" />
 </Solution>

@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SmartVenue.Application.Common;
-using SmartVenue.Application.Common.Interfaces;
-using SmartVenue.Domain.Entities.Identity;
-using SmartVenue.Infrastructure;
-using SmartVenue.Infrastructure.Persistence;
-using SmartVenue.Infrastructure.Persistence.Seed;
-using SmartVenue.Web.Services;
+using smartVenue.Application;
+using smartVenue.core.Interfaces;
+using smartVenue.DataAccess;
+using smartVenue.Infrastructure;
+using smartVenue.Infrastructure.Persistence;
+using smartVenue.Infrastructure.Persistence.Seed;
+using smartVenue.Web.Services;
 
-namespace SmartVenue.Web
+namespace smartVenue.Web
 {
     public class Program
     {

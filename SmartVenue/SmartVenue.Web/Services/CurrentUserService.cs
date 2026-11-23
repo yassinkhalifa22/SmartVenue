@@ -1,7 +1,7 @@
-﻿using SmartVenue.Application.Common;
+﻿using smartVenue.core.Interfaces;
 using System.Security.Claims;
 
-namespace SmartVenue.Web.Services
+namespace smartVenue.Web.Services
 {
 
     public class CurrentUserService : ICurrentUserService

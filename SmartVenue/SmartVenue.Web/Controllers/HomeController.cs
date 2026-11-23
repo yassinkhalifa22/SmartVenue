@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SmartVenue.Domain.Entities;
+using smartVenue.Domain.Entities;
 using System.Diagnostics;
 
-namespace SmartVenue.Web.Controllers
+namespace smartVenue.Web.Controllers
 {
     public class HomeController : Controller
     {
