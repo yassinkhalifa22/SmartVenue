@@ -1,11 +1,8 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+
 using smartVenue.Application;
 using smartVenue.core.Interfaces;
 using smartVenue.DataAccess;
-using smartVenue.Infrastructure;
-using smartVenue.Infrastructure.Persistence;
-using smartVenue.Infrastructure.Persistence.Seed;
+using smartVenue.DataAccess.Persistence.Seed;
 using smartVenue.Web.Services;
 
 namespace smartVenue.Web
@@ -16,38 +13,34 @@ namespace smartVenue.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
-
             builder.Services.AddHttpContextAccessor();
 
+            builder.Services.AddApplication();
+            builder.Services.AddDataAccess(builder.Configuration);
 
-            builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-
-
 
             var app = builder.Build();
 
-
             DataSeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 
-
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
-            app.UseRouting();
-
-            app.UseAuthorization();
             app.UseStaticFiles();
 
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.MapStaticAssets();
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")

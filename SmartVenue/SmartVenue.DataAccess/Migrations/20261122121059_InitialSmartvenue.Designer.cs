@@ -6,15 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using smartVenue.DataAccess.Context;
-using smartVenue.Infrastructure.Persistence;
-
 #nullable disable
 
-namespace smartVenue.Infrastructure.Migrations
+namespace smartVenue.DataAccess.Migrations
 {
     [DbContext(typeof(SmartVenueDbContext))]
     [Migration("20261122121059_InitialSmartvenue")]
-    partial class InitialSmartvenue
+    public partial class InitialSmartvenue : Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

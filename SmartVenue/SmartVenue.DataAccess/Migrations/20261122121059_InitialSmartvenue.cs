@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using smartVenue.DataAccess.Context;
 
 #nullable disable
 
-namespace smartVenue.Infrastructure.Migrations
+namespace smartVenue.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class InitialSmartvenue : Migration

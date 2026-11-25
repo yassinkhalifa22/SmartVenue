@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using smartVenue.Domain.Entities;
+using smartVenue.Web.Models;
 using System.Diagnostics;
 
 namespace smartVenue.Web.Controllers
@@ -16,10 +16,16 @@ namespace smartVenue.Web.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(
+            Duration = 0,
+            Location = ResponseCacheLocation.None,
+            NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new smartVenue.Web.Models.ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }

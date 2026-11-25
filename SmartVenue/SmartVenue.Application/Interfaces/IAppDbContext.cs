@@ -8,7 +8,7 @@ using smartVenue.core.Entites.Identity;
 using smartVenue.core.Entites.Ticketing;
 using smartVenue.core.Entites.Notifications;
 
-namespace smartVenue.core.Interfaces
+namespace smartVenue.Application.Interfaces
 { 
     public interface IAppDbContext
     {

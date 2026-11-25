@@ -5,11 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using smartVenue.DataAccess.Context;
-using smartVenue.Infrastructure.Persistence;
-
 #nullable disable
 
-namespace smartVenue.Infrastructure.Migrations
+namespace smartVenue.DataAccess.Migrations
 {
     [DbContext(typeof(SmartVenueDbContext))]
     partial class SmartVenueDbContextModelSnapshot : ModelSnapshot

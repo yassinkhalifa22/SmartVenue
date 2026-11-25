@@ -10,7 +10,7 @@ using smartVenue.core.Entites.Ticketing;
 using smartVenue.core.Entites.Identity;
 
 
-namespace smartVenue.Infrastructure.Persistence.Seed;
+namespace smartVenue.DataAccess.Persistence.Seed;
 
 public static class DataSeeder
 {

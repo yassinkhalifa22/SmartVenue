@@ -8,9 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmartVenue.Application\SmartVenue.Application.csproj" />
+    <ProjectReference Include="..\SmartVenue.Core\SmartVenue.Core.csproj" />
     <ProjectReference Include="..\SmartVenue.DataAccess\SmartVenue.DataAccess.csproj" />
-    <ProjectReference Include="..\SmartVenue.Domain\SmartVenue.Domain.csproj" />
-    <ProjectReference Include="..\SmartVenue.Infrastructure\SmartVenue.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

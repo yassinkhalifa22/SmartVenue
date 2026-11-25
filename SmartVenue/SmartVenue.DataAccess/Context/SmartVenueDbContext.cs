@@ -2,19 +2,20 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using smartVenue.core.Entities.Identity;
 using smartVenue.core.Common;
+using smartVenue.core.Entites.BookingEntites;
+using smartVenue.core.Entites.Identity;
+using smartVenue.core.Entites.Notifications;
+using smartVenue.core.Entites.Ticketing;
 using smartVenue.core.Entities.BookingEntites;
 using smartVenue.core.Entities.Identity;
 using smartVenue.core.Entities.Venues;
+using smartVenue.core.Interfaces;
+using smartVenue.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using smartVenue.core.Interfaces;
-using smartVenue.core.Entites.Identity;
-using smartVenue.core.Entites.BookingEntites;
-using smartVenue.core.Entites.Ticketing;
-using smartVenue.core.Entites.Notifications;
+
 
 namespace smartVenue.DataAccess.Context
 {
