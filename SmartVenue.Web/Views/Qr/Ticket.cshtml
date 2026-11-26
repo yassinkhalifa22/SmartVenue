@@ -1,0 +1,31 @@
+﻿@model SmartVenue.Business.DTOs.Ticketing.QrTicketDto
+
+@{
+    ViewData["Title"] = "My QR Ticket";
+}
+
+<div class="container mt-4">
+    <div class="card p-4 text-center">
+        <h2>My QR Ticket</h2>
+
+        <p><strong>Ticket ID:</strong> @Model.Id</p>
+        <p><strong>Booking ID:</strong> @Model.BookingId</p>
+        <p><strong>Status:</strong> @Model.Status</p>
+        <p><strong>Issued At:</strong> @Model.IssuedAt</p>
+        <p><strong>Expires At:</strong> @(Model.ExpiresAt?.ToString() ?? "No expiration")</p>
+
+        <hr />
+
+        <h4>Scan Your QR Code</h4>
+
+        <div class="my-3">
+            <img src="data:image/png;base64,@ViewBag.QrCodeImage"
+                 alt="QR Ticket"
+                 style="width:250px; height:250px;" />
+        </div>
+
+        <p class="text-muted">
+            Keep this QR Code safe. You will need it when entering the venue.
+        </p>
+    </div>
+</div>
