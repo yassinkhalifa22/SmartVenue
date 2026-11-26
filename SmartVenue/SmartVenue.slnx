@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SmartVenue.Business/SmartVenue.Business.csproj" />
+  <Project Path="SmartVenue.DataAccess/SmartVenue.DataAccess.csproj" />
+  <Project Path="SmartVenue/SmartVenue.Web.csproj" />
+</Solution>
